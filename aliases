@@ -1,0 +1,3 @@
+
+unalias test
+alias test='./build_tests.sh && ./run_tests.sh'

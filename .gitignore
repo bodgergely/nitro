@@ -1,0 +1,11 @@
+visual_studio_files/
+bin/
+lib/
+Debug/
+x64/
+.vs/
+build/*
+inputs/*
+.cproject
+.project
+.settings
