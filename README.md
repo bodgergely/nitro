@@ -17,18 +17,18 @@ number of unique symbols (8 bit value) is equal or less than 16.
 	- Build a symbol table which associates the symbols with their encodings (prepend to the output)
 	- Iterate over the input and encode the symbols
 
-it also offers a rather straightforward way to work in constant time to
-'index into' the compressed representation to retrieve an original symbol.
+It offers a rather straightforward way to 'index into' (in constant time) 
+the compressed representation to retrieve an original symbol.
 This is possible because we are using identical block size (number of bits) to encode
-every symbol. 
+every symbol thus making the index calculation simple.
 
-Arithmetic encoding support offers better compression ratios but more complicated to
+Arithmetic encoding offers better compression ratios but more complicated to
 implement and very quickly degrades if the number of unique characters are large.
-It is the next candidate for encoding scheme to be implemented in nitro.
+It is the next candidate encoding scheme to be implemented in nitro.
 
 The second BIG design constraint is the need to keep the whole input data in memory as nitro
 does the compression in memory without flushing to disk. This has the advantage of a rather 
-simplified and flexible interface for users and is not filestream bound.
+simplified and flexible interface for users since is not filestream bound.
 
 
 ## Platform support
@@ -59,25 +59,32 @@ Google Test unit tests.
 
 After building the library and test driver you can run ./run_tests.sh
 
-## Requirements
+## Requirements for building
 
-- GTest
+- Google Test for C++ (sudo apt-get install googletest)
 - gcc 7.3.0 or Visual Studio 2017 or any C++17 supporting compiler (C++14 should work too)
-
-### LD_LIBRARY_PATH should be set when using non system shared lib location.
+- LD_LIBRARY_PATH should be set when using non system shared lib location.
 
 (You can export LD_LIBRARY_PATH into your environment too for convenience)
 
-## example: 
+## nitro library
+
+```
+#include <nitro/nitro.h>
+```
+
+gcc app.c -o app -lnitro
+ 
+
+## nitro app
 
 LD_LIBRARY_PATH=./lib ./bin/nitro -c genome.txt compressed.txt
 
 
-# Licence
+## Licence
 MIT
 
-TODO
-====
+## TODO
 
 - Set up cmake/premake/make and test on linux
 - Write Google Tests
